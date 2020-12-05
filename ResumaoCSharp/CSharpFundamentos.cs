@@ -1,20 +1,20 @@
 ﻿using System;
+using System.Dynamic;
 using System.Globalization;
 
 namespace ResumaoCSharp
 {
-    class Program
+    class CSharpFundamentos
     {
         /****************************************************************************
-         * ESSE É UM RESUMÃO PRÁTICO E COMENTADOS SOBRE OS FUNDAMENTOS DO C#        *
          *                                                                          *
-         *   CRIADO PARA REFERÊNCIAS RÁPIDAS, ABSORÇÃO E FIXAÇÃO DO CONTEÚDO        *
-         ****************************************************************************
-         */
+         *    ESSE É UM RESUMÃO PRÁTICO E COMENTADOS SOBRE OS FUNDAMENTOS DO C#     *
+         *                                                                          *
+         *     CRIADO PARA REFERÊNCIAS RÁPIDAS, ABSORÇÃO E FIXAÇÃO DO CONTEÚDO      *
+         *                                                                          *
+         ****************************************************************************/
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
-
             #region C# - Comentários
             //Isto aqui é um comentário simples - trecho que não será executado!
 
@@ -30,7 +30,7 @@ namespace ResumaoCSharp
                Não há necessidade do colocar os '*' entre os delimitador de comentário
             */
 
-            // <summary>
+            /// <summary>
             /// Este é um comentário XML - usado acima de métodos/classes/tipos
             /// <summary>
             /// <param name="args"></param>
@@ -108,8 +108,8 @@ namespace ResumaoCSharp
             var variavelString = "Texto"; // var = string
             var variavelClass = new Object(); // var = Object
 
-            // var variavelImpossivel;  var = ?    ERRO DE COMPILAÇÃO
-            // var variavelImpossivel = null;  var = ?    ERRO DE COMPILAÇÃO
+            // var variavelImpossivel; ====> var = ?; --- ERRO DE COMPILAÇÃO
+            // var variavelImpossivel = null; ====> var = ? --- ERRO DE COMPILAÇÃO
 
             #endregion
 
@@ -244,18 +244,222 @@ namespace ResumaoCSharp
             bool operando1 = true;
             bool operando2 = false;
 
-            // operadores unários
             bool operadorNegacao = !operando1; // operadorNegacao = !true (= false)
 
-            // operadores binários
             bool operadorE = operando1 && operando2; // operadorE = false
             bool operadorOu = operando1 || operando2; // operadorOu = true
             bool operadorOuExclusivo = operando1 ^ operando2; // operadorOuExclusivo = true
-
-            // operadores ternários
-            bool operadorTernario = operando1 ? true : false;
-
             #endregion
+
+            #region C# - Operadores de Atribuição (= += -= *= /= ++ --)
+            //atribuição simples e direta - cria variavel e inicializa atribuindo um literal
+            var num1 = 50;
+            
+            //atribuição simples - variavel já existe, simplesmente atribui um literal
+            num1 = 5;
+
+            //atribuição aditiva - variavel recebe ela mesma e soma um literal
+            num1 += 10; // num1 = num1 + 10
+            
+            //atribuição subtrativa - variavel recebe ela mesma e subtrai um literal
+            num1 -= 10; // num1 = num1 - 10
+            
+            //atribuição multiplicativa - variavel recebe ela mesma e multiplica por um literal
+            num1 *= 2; // num1 = num1 * 10
+            
+            //atribuição divisiva - variavel recebe ela mesma e é dividido por um literal
+            num1 /= 2; // num1 = num1 / 10
+
+            //atribuição incremental pós-fixada - atribuição ocorre após a operação
+            num1++; // num1 = num1 + 1
+            //atribuição incremental prefixada - atribuição ocorre antes da operação
+            ++num1; // num1 = num1 + 1
+
+            //atribuição decremental pós-fixada - atribuição ocorre após a operação
+            num1--; // num1 = num1 - 1
+            //atribuição decremental prefixada - atribuição ocorre antes da operação
+            --num1; // num1 = num1 - 1
+            /****************************************************************************
+            * OBSERVAÇÃO:
+            * 
+            * Pós-fixada => ocorre depois da "leitura" da variavel
+            * Prefixada => ocorre antes da "leitura" da variavel
+            * 
+            * Exemplo: 
+            *       int x = 10;
+            *       Console.WriteLine(x++) // x = 10
+            *       Console.WriteLine(x) // x = 11
+            *       x = 10;
+            *       Console.WriteLine(++x) // x = 11
+            *****************************************************************************/
+
+            //atribuição de outra variavel - ATENÇÃO AO TIPO DE ATRIBUIÇÃO!!!
+            var numA = num1; // ATRIBUIÇÃO POR CÓPIA | num1 = 5
+
+            dynamic varA = new ExpandoObject();
+            varA.nome = "String";
+
+            dynamic varB = varA; // ATRIBUIÇÃO POR REFERÊNCIA
+            varB.nome = "Mudou a string de varA!"; // varA.nome = "Mudou a string de varA"
+            /****************************************************************************
+            * OBSERVAÇÃO:
+            * 
+            * Existem dois tipos de atribuição quando se atribui de outra variavel:
+            *       - Atribuição POR CÓPIA
+            *       - Atribuição POR REFERÊNCIA
+            * 
+            * Este assunto será abordado posteriormente, o intuito aqui é mostrar que
+            * é possivel se atribui a uma variavel outra variavel.
+            *****************************************************************************/
+            #endregion]
+
+            #region C# - Operador de Inversão de Sinal e Operador Ternário (- ?)
+            //Operador de Inversão de Sinal
+            var numeroPositivo = 10;
+            var numeroNegativo = -20;
+            var inversaoDeSinal = -numeroPositivo; // inversaoDeSinal = -10;
+            inversaoDeSinal = -numeroNegativo; // inversaoDeSinal = 20;
+
+            //Operador Ternário - Se 'true', atribui primeiro valor, se 'false', atribui o segundo valor
+            var operadorTernario = numeroPositivo > 5 ? "Primeiro" : "Segundo"; // operadorTernario = "Primeiro"
+            operadorTernario = numeroPositivo > 20 ? "Primeiro" : "Segundo"; // operadorTernario = "Segundo"
+            #endregion
+
+            #region C# - Estruturas de Controle (If/Else Switch While Do/While For Foreach Break Continue)
+            //Controle condicional If/Else
+            var numC = 5;
+            string resultadoIf;
+
+            if (numC > 10) 
+                resultadoIf = "numC maior que 10";
+            else 
+                resultadoIf = "numC não é maior que 10";
+
+            //Controle condicional If/Else If
+            if (numC > 5)
+            {                                                                     
+                resultadoIf = "numC ";
+                resultadoIf += "maior que 5"; 
+            }
+            else if (numC > 10)
+                resultadoIf = "numC maior que 10";
+            else
+            {
+                resultadoIf = "numC não é maior que 10 mas é maior que 5";
+            }
+            /****************************************************************************
+            * OBSERVAÇÃO:
+            * 
+            * Utilizar as chaves { } quando houver mais de uma 
+            * sentença de código para ser executada dentro do If/Else.
+            *****************************************************************************/
+
+            //Controle condicional Switch
+            switch (numC)
+            {
+                case 1:
+                    resultadoIf = "numC é 1";
+                    break;
+                case 2:
+                case 3:
+                case 4:
+                    resultadoIf = "numC é 2 ou 3 ou 4";
+                    break;
+                case 5:
+                    resultadoIf = "numC é 5";
+                    break;
+                default:
+                    resultadoIf = "numC é um numero diferente de 1, 2, 3, 4 e 5";
+                    break;
+            }
+
+            //Controle de repetição While 
+            bool chegouAoNum10 = false;
+            while(chegouAoNum10) // CUIDADO COM LOOPS INFINITOS
+            {
+                if (numC == 10)
+                    chegouAoNum10 = true;
+                else if (numC > 10)
+                    numC--;
+                else
+                    numC++;
+            }
+
+            //Controle de repetição Do/While
+            numC = new Random().Next(0, 50); // número aleatório entre 0 e 50
+            chegouAoNum10 = false;
+            do
+            {
+                if (numC == 10)
+                    chegouAoNum10 = true;
+                else if (numC > 10)
+                    numC--;
+                else
+                    numC++;
+            }
+            while (chegouAoNum10); // CUIDADO COM LOOPS INFINITOS
+
+            //Controle de repetição For
+            string resultado1 = "";
+            for (int i = 0; i < 10; i++)// CUIDADO COM LOOPS INFINITOS
+            {
+                resultado1 += ($"{i}"); 
+            }
+            //resultado1 = "01233456789"
+
+            string resultado2 = "";
+            for (int i = 0, j = 1; i < 10 && j < 6; i++, j++) // pode ter multiplas variaveis de controle
+            {
+                resultado2 += ($"{i} {j}");
+            }
+            //resultado2 = "0 11 22 33 44 5"
+
+            //Controle de repetição Foreach
+            string resultado3 = "";
+            string string1 = "esta string será percorrida caractere a caractere";
+            foreach (char caractere in string1)
+            {
+                resultado3 += caractere;
+            }
+            //resultado3 = "esta string será percorrida caractere a caractere"
+
+            string resultado4 = "";
+            string[] arrayString = new string[] { "Foreach", "percorre", "elemento", "a", "elemento" };
+            foreach (var elementoString in arrayString)
+            {
+                resultado4 += elementoString;
+            }
+            //resultado4 = "Foreachpercorreelementoaelemento"
+
+
+            //Controle de Interrupção de repetição Break
+            string resultado5 = "";
+            for (int i = 0; i < 30; i++)
+            {
+                if (i > 18)
+                    break;
+                resultado5 += $"{i} ";
+            }
+            // resultado5 = "0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 "
+
+            //Controle de continuação de repetição Continue
+            string resultado6 = "";
+            for (int i = 0; i < 30; i++)
+            {
+                if (i > 8 &&  i < 20)
+                    continue;
+                resultado6 += $"{i} ";
+            }
+            // resultado5 = "0 1 2 3 4 5 6 7 8 20 21 22 23 24 25 26 27 28 29 "
+            #endregion
+
+            /****************************************************************************
+             *                                                                          *
+             *                 POO - PROGRAMAÇÃO ORIENTADA A OBJETOS                    *
+             *                                                                          *
+             ****************************************************************************/
+
+            OrientacaoAObjetos.MainPOO();
         }
-    }
-}
+    } 
+}   
